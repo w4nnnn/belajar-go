@@ -14,28 +14,28 @@ Kamu yang akan menulis kodenya secara mandiri, dan saya akan mengevaluasinya set
 
 ## 📌 Tahap 1: Inisialisasi Proyek & Tooling
 
-- [ ] **Buat folder proyek dan inisialisasi Go Module.**
-  - [ ] `mkdir library-api && cd library-api`
-  - [ ] `go mod init <nama-module-mu>` (misal: `github.com/username/library-api`)
-- [ ] **Buat struktur folder standar.**
-  - [ ] Buat folder `cmd/api`
-  - [ ] Buat folder `internal/config`
-  - [ ] Buat folder `internal/db`
-  - [ ] Buat folder `internal/handler`
-- [ ] **Install *tools* yang dibutuhkan (jika belum ada).**
-  - [ ] `goose` (untuk migrasi database).
-  - [ ] `sqlc` (untuk *generate* kode dari SQL).
-  - [ ] `golangci-lint` (untuk *linting*).
+- [x] **Buat folder proyek dan inisialisasi Go Module.**
+  - [x] `mkdir library-api && cd library-api`
+  - [x] `go mod init <nama-module-mu>` (misal: `github.com/username/library-api`)
+- [x] **Buat struktur folder standar.**
+  - [x] Buat folder `cmd/api`
+  - [x] Buat folder `internal/config`
+  - [x] Buat folder `internal/db`
+  - [x] Buat folder `internal/handler`
+- [x] **Install *tools* yang dibutuhkan (jika belum ada).**
+  - [x] `goose` (untuk migrasi database).
+  - [x] `sqlc` (untuk *generate* kode dari SQL).
+  - [x] `golangci-lint` (untuk *linting`).
 
 ---
 
 ## 📌 Tahap 2: Database Setup & Migrasi
 
-- [ ] **Buat database PostgreSQL lokal.** (Bisa via Docker atau instalasi langsung).
-- [ ] **Buat file migrasi menggunakan Goose.**
-  - [ ] Buat folder `sql/schema`.
-  - [ ] Buat file migrasi (misal: `001_create_books.sql`).
-  - [ ] Tulis query SQL `CREATE TABLE books` dengan kolom: 
+- [x] **Buat database PostgreSQL lokal.** (Bisa via Docker atau instalasi langsung).
+- [x] **Buat file migrasi menggunakan Goose.**
+  - [x] Buat folder `sql/schema`.
+  - [x] Buat file migrasi (misal: `001_create_books.sql`).
+  - [x] Tulis query SQL `CREATE TABLE books` dengan kolom: 
     - `id` (UUID PRIMARY KEY)
     - `title` (VARCHAR NOT NULL)
     - `author` (VARCHAR NOT NULL)
@@ -43,7 +43,7 @@ Kamu yang akan menulis kodenya secara mandiri, dan saya akan mengevaluasinya set
     - `is_available` (BOOLEAN DEFAULT true)
     - `created_at` (TIMESTAMP)
     - `updated_at` (TIMESTAMP).
-  - [ ] Tulis query pembatalan (`DROP TABLE books`).
+  - [x] Tulis query pembatalan (`DROP TABLE books`).
 - [x] **Jalankan migrasi (Goose Up).**
   - [x] Buat file `.env` di *root* proyek (`library-api/.env`) dan isi dengan:
     ```env
@@ -58,20 +58,20 @@ Kamu yang akan menulis kodenya secara mandiri, dan saya akan mengevaluasinya set
 
 ## 📌 Tahap 3: Konfigurasi SQLC & Generate Kode
 
-- [ ] **Buat file *query* SQL.**
-  - [ ] Buat folder `sql/query`.
-  - [ ] Buat file `books.sql`.
-  - [ ] Tulis query dengan anotasi `sqlc` untuk operasi CRUD:
+- [x] **Buat file *query* SQL.**
+  - [x] Buat folder `sql/query`.
+  - [x] Buat file `books.sql`.
+  - [x] Tulis query dengan anotasi `sqlc` untuk operasi CRUD:
     - CreateBook (`INSERT ... RETURNING *`)
     - GetBook (`SELECT ... WHERE id = $1 LIMIT 1`)
     - ListBooks (`SELECT ... ORDER BY created_at DESC`)
     - UpdateBookAvailability (`UPDATE ... SET is_available = $2 ... RETURNING *`)
     - DeleteBook (`DELETE ...`)
-- [ ] **Buat file konfigurasi `sqlc.yaml`.**
-  - [ ] Atur *engine* ke `postgresql`, arahkan folder schema dan query, lalu set *output* ke `internal/db`.
-- [ ] **Generate kode Go.**
-  - [ ] Jalankan `sqlc generate`.
-  - [ ] Periksa apakah file `models.go` dan `books.sql.go` muncul di dalam `internal/db`.
+- [x] **Buat file konfigurasi `sqlc.yaml`.**
+  - [x] Atur *engine* ke `postgresql`, arahkan folder schema dan query, lalu set *output* ke `internal/db`.
+- [x] **Generate kode Go.**
+  - [x] Jalankan `sqlc generate`.
+  - [x] Periksa apakah file `models.go` dan `books.sql.go` muncul di dalam `internal/db`.
 
 ---
 
