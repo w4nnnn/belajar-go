@@ -77,9 +77,9 @@ Kamu yang akan menulis kodenya secara mandiri, dan saya akan mengevaluasinya set
 
 ## 📌 Tahap 4: Setup Framework Gin & Koneksi Database
 
-- [ ] **Install *dependencies*.**
-  - [ ] `go get -u github.com/gin-gonic/gin`
-  - [ ] `go get github.com/jackc/pgx/v5/pgxpool`
+- [x] **Install *dependencies*.**
+  - [x] `go get -u github.com/gin-gonic/gin`
+  - [x] `go get github.com/jackc/pgx/v5/pgxpool`
 - [ ] **Buat file utama (`cmd/api/main.go`).**
   - [ ] Buat fungsi `main()`.
   - [ ] Konfigurasi koneksi database menggunakan `pgxpool.New`.
