@@ -7,9 +7,8 @@ package db
 
 import (
 	"context"
-	"database/sql"
 
-	"github.com/google/uuid"
+	"github.com/jackc/pgx/v5/pgtype"
 )
 
 const createBook = `-- name: CreateBook :one
@@ -21,11 +20,11 @@ RETURNING id, title, author, isbn, is_available, created_at, updated_at
 type CreateBookParams struct {
 	Title  string
 	Author string
-	Isbn   sql.NullString
+	Isbn   pgtype.Text
 }
 
 func (q *Queries) CreateBook(ctx context.Context, arg CreateBookParams) (Book, error) {
-	row := q.db.QueryRowContext(ctx, createBook, arg.Title, arg.Author, arg.Isbn)
+	row := q.db.QueryRow(ctx, createBook, arg.Title, arg.Author, arg.Isbn)
 	var i Book
 	err := row.Scan(
 		&i.ID,
@@ -44,8 +43,8 @@ DELETE FROM books
 WHERE id = $1
 `
 
-func (q *Queries) DeleteBook(ctx context.Context, id uuid.UUID) error {
-	_, err := q.db.ExecContext(ctx, deleteBook, id)
+func (q *Queries) DeleteBook(ctx context.Context, id pgtype.UUID) error {
+	_, err := q.db.Exec(ctx, deleteBook, id)
 	return err
 }
 
@@ -54,8 +53,8 @@ SELECT id, title, author, isbn, is_available, created_at, updated_at FROM books
 WHERE id = $1
 `
 
-func (q *Queries) GetBook(ctx context.Context, id uuid.UUID) (Book, error) {
-	row := q.db.QueryRowContext(ctx, getBook, id)
+func (q *Queries) GetBook(ctx context.Context, id pgtype.UUID) (Book, error) {
+	row := q.db.QueryRow(ctx, getBook, id)
 	var i Book
 	err := row.Scan(
 		&i.ID,
@@ -76,7 +75,7 @@ ORDER BY created_at DESC
 `
 
 func (q *Queries) ListBooks(ctx context.Context) ([]Book, error) {
-	rows, err := q.db.QueryContext(ctx, listBooks)
+	rows, err := q.db.Query(ctx, listBooks)
 	if err != nil {
 		return nil, err
 	}
@@ -97,9 +96,6 @@ func (q *Queries) ListBooks(ctx context.Context) ([]Book, error) {
 		}
 		items = append(items, i)
 	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
 	if err := rows.Err(); err != nil {
 		return nil, err
 	}
@@ -116,12 +112,12 @@ RETURNING id, title, author, isbn, is_available, created_at, updated_at
 `
 
 type UpdateBookAvailabilityParams struct {
-	ID          uuid.UUID
+	ID          pgtype.UUID
 	IsAvailable bool
 }
 
 func (q *Queries) UpdateBookAvailability(ctx context.Context, arg UpdateBookAvailabilityParams) (Book, error) {
-	row := q.db.QueryRowContext(ctx, updateBookAvailability, arg.ID, arg.IsAvailable)
+	row := q.db.QueryRow(ctx, updateBookAvailability, arg.ID, arg.IsAvailable)
 	var i Book
 	err := row.Scan(
 		&i.ID,

@@ -5,18 +5,15 @@
 package db
 
 import (
-	"database/sql"
-	"time"
-
-	"github.com/google/uuid"
+	"github.com/jackc/pgx/v5/pgtype"
 )
 
 type Book struct {
-	ID          uuid.UUID
+	ID          pgtype.UUID
 	Title       string
 	Author      string
-	Isbn        sql.NullString
+	Isbn        pgtype.Text
 	IsAvailable bool
-	CreatedAt   time.Time
-	UpdatedAt   time.Time
+	CreatedAt   pgtype.Timestamp
+	UpdatedAt   pgtype.Timestamp
 }
