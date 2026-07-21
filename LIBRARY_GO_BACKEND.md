@@ -80,13 +80,13 @@ Kamu yang akan menulis kodenya secara mandiri, dan saya akan mengevaluasinya set
 - [x] **Install *dependencies*.**
   - [x] `go get -u github.com/gin-gonic/gin`
   - [x] `go get github.com/jackc/pgx/v5/pgxpool`
-- [ ] **Buat file utama (`cmd/api/main.go`).**
-  - [ ] Buat fungsi `main()`.
-  - [ ] Konfigurasi koneksi database menggunakan `pgxpool.New`.
-  - [ ] Inisialisasi `db.New(pool)` dari kode *sqlc* yang di-*generate*.
-  - [ ] Inisialisasi Gin router (`gin.Default()`).
-  - [ ] Buat *endpoint* sederhana untuk *health check* (`GET /ping`).
-  - [ ] Jalankan server di port tertentu (misal: `8080`).
+- [x] **Buat file utama (`cmd/api/main.go`).**
+  - [x] Buat fungsi `main()`.
+  - [x] Konfigurasi koneksi database menggunakan `pgxpool.New`.
+  - [x] Inisialisasi `db.New(pool)` dari kode *sqlc* yang di-*generate*.
+  - [x] Inisialisasi Gin router (`gin.Default()`).
+  - [x] Buat *endpoint* sederhana untuk *health check* (`GET /ping`).
+  - [x] Jalankan server di port tertentu (misal: `8080`).
 
 ---
 
